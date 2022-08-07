@@ -79,7 +79,8 @@ def recognize_face(image):
 cap=cv2.VideoCapture(0)
 
 detector = dlib.get_frontal_face_detector()
-data = pickle.loads(open('D:\Python\pi-face-recognition\pi-face-recognition/encodings.pickle', "rb").read())
+picklePath = 'C:\laragon\www\ei/app/pi-face-recognition/encodings.pickle'
+data = pickle.loads(open(picklePath, "rb").read())
 
 
 while True:
@@ -88,7 +89,7 @@ while True:
 
     cv2.line(frame,(235,10),(235,470),(255,30,10),1)
     cv2.line(frame,(405,10),(405,470),(255,30,10),1)
-    cv2.putText(frame, "Allign your face between lines", (10, 10), cv2.FONT_HERSHEY_SIMPLEX,0.5, (255, 255, 255), 1)
+    cv2.putText(frame, "Align your face between lines", (10, 10), cv2.FONT_HERSHEY_SIMPLEX,0.5, (255, 255, 255), 1)
     
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     rects = detector(gray, 0)

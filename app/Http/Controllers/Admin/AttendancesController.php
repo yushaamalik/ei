@@ -48,8 +48,8 @@ class AttendancesController extends Controller
         $user = Auth::guard('web')->user();
         // return $user->rollNumber;
 
-        // $studentAttendance = Attendance::where('rollNumber', $user->rollNumber)->get();
-        $studentAttendance = Attendance::all();
+        $studentAttendance = Attendance::where('rollNumber', $user->rollNumber)->get();
+        // $studentAttendance = Attendance::all();
 
         return $studentAttendance;
     }
