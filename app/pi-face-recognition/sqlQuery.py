@@ -1,21 +1,30 @@
 import mysql.connector
 from mysql.connector import Error
+from datetime import date
 
 
 
 
 connection = mysql.connector.connect(host='localhost',
-                                    database='faceattendance',
+                                    database='ei',
                                     user='root',
                                     password='')
 
-mySql_insert_query = """INSERT INTO attendances (student_id, status) 
-                    VALUES 
-                    (1, "Present") """
+mycursor = connection.cursor()
+  
+# Execute the query
+todayDate = str(date.today())
+rollNumber = str(436)
+print(todayDate)
+query = "SELECT count(id) FROM attendances WHERE rollNumber = "+rollNumber+" AND created_at = '"+todayDate+"' ;" 
+mycursor.execute(query)
+  
+myresult = mycursor.fetchall()
+print(mycursor._executed)
+  
+print(myresult[-1][-1])
+  
+# Close database connection
+connection.close()
 
-cursor = connection.cursor()
-cursor.execute(mySql_insert_query)
-connection.commit()
-print(cursor.rowcount, "Record inserted successfully into Laptop table")
-cursor.close()
-
+# WHERE rollNumber = " +name+ " AND created_at = "+date.today()+" 

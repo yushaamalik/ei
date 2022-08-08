@@ -38,19 +38,11 @@ class AttendancesController extends Controller
             $data = $process->getOutput();
 
             // echo $data . " - And now the Python Controller is called.";
+
+
+
             return redirect()->route('admin.dashboard')->with('success', 'Attendance marked.');
     }
 
-    public function getStudentAttendance()
-    {
-        # code...
 
-        $user = Auth::guard('web')->user();
-        // return $user->rollNumber;
-
-        $studentAttendance = Attendance::where('rollNumber', $user->rollNumber)->get();
-        // $studentAttendance = Attendance::all();
-
-        return $studentAttendance;
-    }
 }

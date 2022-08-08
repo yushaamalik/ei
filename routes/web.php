@@ -23,4 +23,4 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/my-attendance', [App\Http\Controllers\Admin\AttendancesController::class, 'getStudentAttendance'])->name('attendance.getStudentAttendance');
+Route::get('/my-attendance', [App\Http\Controllers\AttendancesController::class, 'getStudentAttendance'])->name('attendance.getStudentAttendance');

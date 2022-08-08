@@ -5,10 +5,14 @@ from imutils import face_utils
 import time
 import dlib
 import pickle5 as pickle
+from datetime import date
+
 
 import face_recognition
 import mysql.connector
 from mysql.connector import Error
+
+
 face=None
 boxes=None
 
@@ -52,19 +56,32 @@ def recognize_face(image):
             cv2.putText(image, "Time: "+tm, (left, y), cv2.FONT_HERSHEY_SIMPLEX,0.5, (0, 255, 0), 2)
             cv2.putText(image, "Present: ", (left, y+20), cv2.FONT_HERSHEY_SIMPLEX,0.5, (0, 255, 0), 2)
 
-
-            
-            mySql_insert_query = "INSERT INTO attendances (rollNumber, status, created_at) VALUES (%s, %s, %s)"
-            val = (name, "Present", dt)
+            todayDate = str(date.today())
+            rollNumber = str(name)
+            query = "SELECT count(id) FROM attendances WHERE rollNumber = "+rollNumber+" AND created_at = '"+todayDate+"' ;"
             cursor = mydb.cursor()
-            cursor.execute(mySql_insert_query, val)
-            mydb.commit()
+
+            cursor.execute(query)
+            
+            myresult = cursor.fetchall()
+            
+            # print(myresult[-1][-1])
+            if(myresult[-1][-1] == 0):
+                mySql_insert_query = "INSERT INTO attendances (rollNumber, status, created_at) VALUES (%s, %s, %s)"
+                val = (name, "Present", date.today())
+                cursor = mydb.cursor()
+                cursor.execute(mySql_insert_query, val)
+                mydb.commit()
+
+           
             # break
             # exit()
             
             
 
     cv2.imshow('Recognized image',image[20:450,30:630])
+
+
                                                  
     '''
     face_locations = face_recognition.face_locations(rgb_image)
@@ -110,7 +127,7 @@ while True:
         
         if COUNTER >= CONSEC_FRAMES:
             recognize_face(frame)
-            time.sleep(2)
+            time.sleep(10)
             COUNTER = 0
             
         
