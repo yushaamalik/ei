@@ -21,6 +21,7 @@
                                     <th style="width: 10%">Sr #</th>
                                     <th>Name</th>
                                     <th>Roll Number</th>
+                                    <th>Date time</th>
                                     <th style="width: 15%">Status</th>
                                     {{-- <th>Action</th> --}}
                                 </tr>
@@ -32,6 +33,9 @@
                                     <td>{{Auth::guard('web')->user()->name}}</td>
                                     <td>
                                         {{$attendance->rollNumber}}
+                                    </td>
+                                    <td>
+                                        {{date('Y-m-d',strtotime($attendance->created_at))}}
                                     </td>
                                     <td>{{$attendance->status}}</td>
                                     {{-- <td >
