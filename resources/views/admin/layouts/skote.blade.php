@@ -162,6 +162,8 @@
                                 <ul class="sub-menu" aria-expanded="false">
                                     {{-- @can('user.create') --}}
                                     <li><a href="{{route('admin.attendance.runFaceRecognition')}}"><i class="typcn typcn-media-record"></i>Mark Attendance</a></li>
+                                    <li><a href="{{route('admin.attendance.getStudentAttendance')}}"><i class="typcn typcn-media-record"></i>Attendance List</a></li>
+
 
                                     
                                 </ul>

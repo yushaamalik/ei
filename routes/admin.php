@@ -44,6 +44,8 @@ Route::middleware(['auth:admin'])->group(function () {
         //Attendance
 
         Route::get('/attendance/run-face-recognition', 'AttendancesController@runFaceRecognition')->name('attendance.runFaceRecognition');
+        Route::get('/attendance/attendances', 'AttendancesController@getStudentAttendance')->name('attendance.getStudentAttendance');
+
 
         //Lectures
 

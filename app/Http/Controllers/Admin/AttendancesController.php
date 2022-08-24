@@ -44,5 +44,22 @@ class AttendancesController extends Controller
             return redirect()->route('admin.dashboard')->with('success', 'Attendance marked.');
     }
 
+    public function getStudentAttendance()
+    {
+        # code...
+
+        // $user = Auth::guard('web')->user();
+        // return $user->rollNumber;
+
+        $studentAttendances = Attendance::with('student')->orderBy('id', 'desc')->get();
+        // return $studentAttendances;
+        // $studentAttendances = Attendance::all();
+
+        // return $studentAttendances;
+        return view('admin.attendances.attendance', [
+            'studentAttendances' => $studentAttendances,
+        ]);
+    }
+
 
 }

@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Attendance extends Model
 {
     use HasFactory;
+
+    public function student()
+    {
+        # code...
+        return $this->belongsTo('App\Models\User', 'rollNumber', 'rollNumber');
+    }
 }
